@@ -10,5 +10,9 @@ def home_page():
 def form_page():
     return render_template('pages/form.html')
 
+@app.route("/about")
+def about_page():
+    return render_template('pages/about.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
