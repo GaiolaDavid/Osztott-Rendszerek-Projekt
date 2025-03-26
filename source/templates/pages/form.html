@@ -3,6 +3,17 @@
 {% block title %}Vote{% endblock %}
 
 {% block content %}
-    <h1>Form page</h1>
-    <p>This is the form page of your application.</p>
+    <div class="form-container">
+        <h1>Form page</h1>
+        <p>This is the form page of your application.</p>
+        <form action="/form" method="post" class="styled-form">
+            {% for field in f %}
+                <div class="form-group">
+                    <label for="{{ field.name }}">{{ field.question if field.question != "" else field.name }}</label>
+                    <input type="{{ field.type }}" id="{{ field.name }}" name="{{ field.name }}" required>
+                </div>
+            {% endfor %}
+            <button type="submit" class="submit-button">Submit</button>
+        </form>
+    </div>
 {% endblock %}

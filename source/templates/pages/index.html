@@ -3,6 +3,23 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <h1>Welcome to the Home Page!</h1>
-    <p>This is the main page of your application.</p>
+    <div class="home-container">
+        <h1 class="home-title">Welcome to the Home Page!</h1>
+        <p class="home-text">This is the main page of your application.</p>
+
+        <div class="call-to-action">
+            <p class="cta-message">Ready to get started?</p>
+            <a href="/form" class="cta-button">Fill Out the Form</a>
+        </div>
+
+        <div class="feature-list">
+            <h2 class="features-title">Key Features:</h2>
+            <ul class="features">
+                <li class="feature-item">Easy Form Submission</li>
+                <li class="feature-item">Quick Answer Processing</li>
+                <li class="feature-item">User-Friendly Interface</li>
+                <li class="feature-item">Secure Data Handling</li>
+            </ul>
+        </div>
+    </div>
 {% endblock %}
