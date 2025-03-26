@@ -1,0 +1,18 @@
+{% extends 'components/base.html' %}
+
+{% block title %}Vote{% endblock %}
+
+{% block content %}
+    <div class="answers-container">
+        <h1 class="page-title">Form page</h1>
+        <p class="answers-header">Your answers:</p>
+        <ul class="answers-list">
+            {% for field in f %}
+                <li class="answer-item">
+                    <strong class="field-name">{{ field.question if field.question != "" else field.name }}:</strong> 
+                    <span class="field-answer">{{ field.answer }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
