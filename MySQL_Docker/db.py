@@ -1,18 +1,32 @@
 import mysql.connector
+from credentials import db_credentials
 
-# Establish connection
-conn = mysql.connector.connect(
-    host="127.0.0.1",  # Since the container is mapped to localhost
-    port=3307,         # Port mapped from Docker
-    user="root",       # Default MySQL user
-    password="strong_password",  # Root password set in Docker
-    database="final_mysql"  # Change this to your actual database name
-)
+class DatabaseConnection:
+    def __init__(self, credentials):
+        self.credentials = credentials
+        self.conn = None
+        self.cursor = None
 
-cursor = conn.cursor()
-cursor.execute("SHOW TABLES;")
-for table in cursor.fetchall():
-    print(table)
+    def establish_connection(self):
+        self.conn = mysql.connector.connect(**self.credentials.get_credentials())
+        self.cursor = self.conn.cursor()
 
-cursor.close()
-conn.close()
+    def execute_query(self, query):
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
+
+    def close_connection(self):
+        self.cursor.close()
+        self.conn.close()
+
+def main():
+    db_connection = DatabaseConnection(db_credentials)
+    db_connection.establish_connection()
+    result = db_connection.execute_query("SHOW TABLES;")
+    for table in result:
+        print(table)
+    db_connection.close_connection()
+
+if __name__ == "__main__":
+    main()
+
