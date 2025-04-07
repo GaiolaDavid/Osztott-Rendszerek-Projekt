@@ -1,4 +1,4 @@
-Voting System
+**Voting System**<br>
 A Distributed Voting System developed by University Students
 
 Overview
