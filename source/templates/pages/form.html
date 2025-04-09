@@ -7,6 +7,18 @@
         <h1>Form page</h1>
         <p>This is the form page of your application.</p>
         <form action="/form" method="post" class="styled-form">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-gender" style="display: flex; margin-bottom: 15px; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                <label for="gender" style="font-weight: bold; margin-right: 10px;">Gender</label>
+                <input type="radio" id="male" name="gender" value="male" style="margin-right: 5px;">
+                <label for="male" style="font-weight: normal; margin-left: 5px;">Male</label>
+                <input type="radio" id="female" name="gender" value="female" style="margin-right: 5px; margin-left: 10px;">
+                <label for="female" style="font-weight: normal; margin-left: 5px;">Female</label>
+              </div>
+              
             {% for field in f %}
                 <div class="form-group">
                     <label for="{{ field.name }}">{{ field.question if field.question != "" else field.name }}</label>

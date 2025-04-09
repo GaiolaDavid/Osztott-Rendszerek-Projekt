@@ -17,10 +17,10 @@ class DatabaseCredentials:
 
 # Create an instance of DatabaseCredentials
 db_credentials = DatabaseCredentials(
-    host="127.0.0.1",
-    port=3307,
+    host="localhost",
+    port=3306,
     user="root",
     password="strong_password",
-    database="final_mysql"
+    database="vote_db"
 )
 

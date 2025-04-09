@@ -1,5 +1,5 @@
 import mysql.connector
-from credentials import db_credentials
+from MySQL_Docker.credentials import db_credentials
 
 class UserRepository:
     def __init__(self, db_credentials):

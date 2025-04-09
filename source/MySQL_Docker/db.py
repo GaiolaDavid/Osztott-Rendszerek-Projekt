@@ -1,5 +1,5 @@
 import mysql.connector
-from credentials import db_credentials
+from MySQL_Docker.credentials import db_credentials
 
 class DatabaseConnection:
     def __init__(self, credentials):

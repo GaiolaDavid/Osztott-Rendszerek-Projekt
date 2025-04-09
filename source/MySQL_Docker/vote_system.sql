@@ -22,4 +22,14 @@ REFERENCES `User` (`UserID`);
 
 CREATE INDEX `idx_User_UserName`
 ON `User` (`UserName`);
+-- Insert data into User table
+INSERT INTO `User` (`UserID`, `UserName`, `Gender`) VALUES
+(1, 'Alice', 1),
+(2, 'Bob', 0),
+(3, 'Charlie', 0);
 
+-- Insert data into Answer table
+INSERT INTO `Answer` (`AnswerID`, `AnswersString`, `Questions`, `UserID`) VALUES
+(1, 'Yes', 1, 1),
+(2, 'No', 2, 2),
+(3, 'Maybe', 3, 3);
