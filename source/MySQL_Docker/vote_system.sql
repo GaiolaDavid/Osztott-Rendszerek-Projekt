@@ -3,14 +3,14 @@
 
 
 CREATE TABLE `User` (
-    `UserID` int  NOT NULL ,
+    `UserID` int  NOT NULL AUTO_INCREMENT ,
     `UserName` varchar(255)  NOT NULL ,
     `Gender` tinyint(1)  NOT NULL ,
     PRIMARY KEY (`UserID`)
 );
 
 CREATE TABLE `Answer` (
-    `AnswerID` int  NOT NULL ,
+    `AnswerID` int  NOT NULL AUTO_INCREMENT ,
     `AnswersString` varchar(255)  NOT NULL ,
     `Questions` int  NOT NULL ,
     `UserID` int  NOT NULL ,

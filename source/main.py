@@ -41,6 +41,18 @@ def answer_page():
     answers = voting_system_repository.get_all_answers()
     return render_template('pages/answers.html', answers=answers)
 
+def check_if_user_exists(name):
+    user_repository = UserRepository(db_credentials)
+    if user_repository.get_user_by_name(name) is not None:
+        return True
+    else:
+        return False
+
+def create_user(name,gender):
+    user_repository = UserRepository(db_credentials)
+    user_repository.create_user(name, gender)
+    return
+
 @app.route("/form",methods=['GET', 'POST'])
 def form_page():
 
@@ -58,7 +70,11 @@ def form_page():
                     f.answer = int(request.form[f.name])
                 except:
                     f.answer = None
-
+        username=str(userdata["name"])
+        if not check_if_user_exists(username):
+            print("User doesn't exist")
+            print(username)
+            #create_user(userdata["name"],userdata["gender"])
         return render_template('pages/form_validated.html',f=fields, userdata=userdata)
     else:
         return render_template('pages/form.html',f=fields)
