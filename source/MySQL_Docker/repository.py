@@ -29,6 +29,8 @@ class UserRepository:
 
     def get_user_by_name(self, user_name):
         query = "SELECT * FROM User WHERE UserName = %s"
+        print(query)
+        print(user_name)
         self.cursor.execute(query, (user_name,))
         return self.cursor.fetchone()
 
@@ -97,6 +99,18 @@ class VotingSystemRepository:
         self.user_repository.close_connection()
         return user
 
+    def create_user(self, user_name, gender):
+        self.user_repository.establish_connection()
+        genderint = 0
+
+        if(gender == 'male'):
+            genderint=0
+        if(gender == 'female'):
+            genderint=1
+        self.user_repository.create_user(user_name, genderint)
+        self.user_repository.close_connection()
+        return True
+
 def main():
     db_credentials = credentials.db_credentials
     voting_system_repository = VotingSystemRepository(db_credentials)
@@ -106,17 +120,19 @@ def main():
     for user in users:
         print(user)
 
-    user_id = 1
+    user_id = 2
     user = voting_system_repository.get_user_by_id(user_id)
     print(user)
 
     user_name = 'Alice'
     user = voting_system_repository.get_user_by_name(user_name)
     print(user)
+    print("Alice test")
 
     user_name = 'Alice1'
     user = voting_system_repository.get_user_by_name(user_name)
     print(user)
+    print("Alice1 test")
 
     answers = voting_system_repository.get_all_answers()
     for answer in answers:
