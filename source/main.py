@@ -39,9 +39,15 @@ def home_page():
 def answer_page():
     voting_system_repository = VotingSystemRepository(db_credentials)
     answers = voting_system_repository.get_all_answers()
+    answers = list(answers)
+    answerlist = list()
+    for a in answers:
+        a=list(a)
+        a[3]=get_user_by_id(a[3])
+        answerlist.append(a)
+    answers=answerlist
     answers = str(answers)
-    answers = answers.replace("]", "")
-    answers = answers.replace("[", "")
+    answers = answers[1:-1]
     answers = "" + answers + ""
     answers = answers.replace("), (",")(")
 
@@ -53,6 +59,12 @@ def check_if_user_exists(name):
         return True
     else:
         return False
+
+def get_user_by_id(userid):
+    voting_system_repository = VotingSystemRepository(db_credentials)
+    name = voting_system_repository.get_user_by_id(userid)
+    name = name[1]
+    return name
 
 def create_user(name,gender):
     voting_system_repository = VotingSystemRepository(db_credentials)
