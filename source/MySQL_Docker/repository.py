@@ -92,7 +92,7 @@ class VotingSystemRepository:
         users = self.user_repository.get_all_users()
         self.user_repository.close_connection()
         with open("log.txt","a") as f:
-            f.write(f"Get all users")
+            f.write(f"Get all users\n")
             f.close()
         return users
 
@@ -101,7 +101,7 @@ class VotingSystemRepository:
         user = self.user_repository.get_user_by_id(user_id)
         self.user_repository.close_connection()
         with open("log.txt","a") as f:
-            f.write(f"User requested by ID:{user}")
+            f.write(f"User requested by ID:{user}\n")
             f.close()
         return user
 
@@ -110,7 +110,7 @@ class VotingSystemRepository:
         answers = self.answer_repository.get_all_answers()
         self.answer_repository.close_connection()
         with open("log.txt","a") as f:
-            f.write(f"Get all answers")
+            f.write(f"Get all answers\n")
             f.close()
         return answers
 
@@ -119,7 +119,7 @@ class VotingSystemRepository:
         answers = self.answer_repository.get_answers_by_user_id(user_id)
         self.answer_repository.close_connection()
         with open("log.txt","a") as f:
-            f.write(f"Get answers by user ID:{answers}")
+            f.write(f"Get answers by user ID:{answers}\n")
             f.close()
         return answers
 
@@ -128,7 +128,7 @@ class VotingSystemRepository:
         user = self.user_repository.get_user_by_name(user_name)
         self.user_repository.close_connection()
         with open("log.txt","a") as f:
-            f.write(f"Get user by name:{user}")
+            f.write(f"Get user by name:{user}\n")
             f.close()
         return user
 
@@ -143,7 +143,7 @@ class VotingSystemRepository:
         self.user_repository.create_user(user_name, genderint)
         self.user_repository.close_connection()
         with open("log.txt","a") as f:
-            f.write(f"Created user:{user_name}")
+            f.write(f"Created user:{user_name}\n")
             f.close()
         return True
 
@@ -155,7 +155,7 @@ class VotingSystemRepository:
         else:
             self.answer_repository.close_connection()
             with open("log.txt", "a") as f:
-                f.write(f"Check if user answered question:{user_id}")
+                f.write(f"Check if user answered question:{user_id}\n")
                 f.close()
             return False
 
@@ -165,7 +165,7 @@ class VotingSystemRepository:
         self.answer_repository.create_answer(user_id, question_id, answer)
         self.answer_repository.close_connection()
         with open("log.txt","a") as f:
-            f.write(f"Create answer by user {user_id} with answer {answer}")
+            f.write(f"Create answer by user {user_id} with answer {answer}\n")
             f.close()
         return True
 
@@ -174,7 +174,7 @@ class VotingSystemRepository:
         self.answer_repository.update_answer(user_id, question_id, answer)
         self.answer_repository.close_connection()
         with open("log.txt","a") as f:
-            f.write(f"Update answer by user {user_id} with answer {answer}")
+            f.write(f"Update answer by user {user_id} with answer {answer}\n")
             f.close()
         return True
 
