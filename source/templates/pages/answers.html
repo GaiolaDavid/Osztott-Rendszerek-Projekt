@@ -4,9 +4,16 @@
 
 {% block content %}
     {% for x in answers %}
-    <div>
-    {{x}}
-</div>
+        <div>
+            ID:{{x[0]}}
+            </br>
+            Answer:{{x[1]}}
+        </br>
+            Question:{{fields[x[2]]}}
+        </br>
+            Username:{{x[3]}}
+        </div>
+    </br>
     {% endfor %}
 
 {% endblock %}

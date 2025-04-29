@@ -12,7 +12,7 @@ class Field:
         self.answer = answer
         self.correct_answer = correct_answer
     def __str__(self):
-        return self.name + " : " + self.answer
+        return self.question
     def __dict__(self):
         return {
             "name": self.name,
@@ -45,7 +45,7 @@ def answer_page():
         a=list(a)
         a[3]=get_user_by_id(a[3])
         answerlist.append(a)
-    return render_template('pages/answers.html', answers=answerlist)
+    return render_template('pages/answers.html', answers=answerlist, fields=fields)
 
 def check_if_user_exists(name):
     voting_system_repository = VotingSystemRepository(db_credentials)
