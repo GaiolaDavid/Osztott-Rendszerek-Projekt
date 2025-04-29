@@ -39,6 +39,12 @@ def home_page():
 def answer_page():
     voting_system_repository = VotingSystemRepository(db_credentials)
     answers = voting_system_repository.get_all_answers()
+    answers = str(answers)
+    answers = answers.replace("]", "")
+    answers = answers.replace("[", "")
+    answers = "" + answers + ""
+    answers = answers.replace("), (",")(")
+
     return render_template('pages/answers.html', answers=answers)
 
 def check_if_user_exists(name):
