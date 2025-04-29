@@ -24,7 +24,7 @@ class Field:
 fields = [
     Field("question1", "Hanyas cipot hord Ruben?", "number", "","valasz"),
     Field("question2", "Mi Ruben masodik neve?", "text", "",""),
-    Field("question3", "Milyen magas Tamas? (Tamas szerint, de amugy alacsonyabb)", "number", "", 184),
+    Field("question3", "Milyen magas Tamas igazából?", "number", "", 184),
     ]
 
 app = Flask(__name__)
