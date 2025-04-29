@@ -1,19 +1,20 @@
 {% extends 'components/base.html' %}
 
-{% block title %}Vote{% endblock %}
+{% block title %}Answers{% endblock %}
 
 {% block content %}
-    {% for x in answers %}
-        <div>
-            ID:{{x[0]}}
-            </br>
-            Answer:{{x[1]}}
-        </br>
-            Question:{{fields[x[2]]}}
-        </br>
-            Username:{{x[3]}}
-        </div>
-    </br>
-    {% endfor %}
-
+<div class="answers-container">
+    <h1 class="page-title">Válaszok</h1>
+    <p class="answers-header">Az összes beküldött szavazat:</p>
+    <ul class="answers-list">
+        {% for answer in answers %}
+        <li class="answer-item">
+            <span class="field-name">ID:</span> <span class="field-answer">{{ answer[0] }}</span><br>
+            <span class="field-name">Answer:</span> <span class="field-answer">{{ answer[1] }}</span><br>
+            <span class="field-name">Question:</span> <span class="field-answer">{{ fields[answer[2]] }}</span><br>
+            <span class="field-name">Username:</span> <span class="field-answer">{{ answer[3] }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}
