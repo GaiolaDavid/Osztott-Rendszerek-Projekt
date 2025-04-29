@@ -29,8 +29,6 @@ class UserRepository:
 
     def get_user_by_name(self, user_name):
         query = "SELECT * FROM User WHERE UserName = %s"
-        print(query)
-        print(user_name)
         self.cursor.execute(query, (user_name,))
         return self.cursor.fetchone()
 
@@ -63,6 +61,26 @@ class AnswerRepository:
     def close_connection(self):
         self.cursor.close()
         self.conn.close()
+
+    def check_if_user_answered_question(self, user_id, question_id):
+        query = "SELECT * FROM Answer WHERE UserID = %s AND Questions = %s"
+        self.cursor.execute(query, (user_id, question_id))
+        return self.cursor.fetchone()
+
+    def create_answer(self, user_id, question_id, answer):
+
+        query = "INSERT INTO Answer(UserID, Questions, AnswersString) VALUES (%s, %s, %s)"
+        self.cursor.execute(query, (user_id, question_id, answer))
+        self.conn.commit()
+        return
+
+    def update_answer(self, user_id, question_id, answer):
+        query = "UPDATE Answer SET AnswersString = %s WHERE UserID = %s AND Questions = %s"
+        self.cursor.execute(query, (answer, user_id, question_id))
+        self.conn.commit()
+        return
+
+
 
 class VotingSystemRepository:
     def __init__(self, db_credentials):
@@ -110,6 +128,29 @@ class VotingSystemRepository:
         self.user_repository.create_user(user_name, genderint)
         self.user_repository.close_connection()
         return True
+
+    def check_if_user_answered_question(self, user_id, question_id):
+        self.answer_repository.establish_connection()
+        if self.answer_repository.check_if_user_answered_question(user_id, question_id) is not None:
+            self.answer_repository.close_connection()
+            return True
+        else:
+            self.answer_repository.close_connection()
+            return False
+
+
+    def create_answer(self, user_id, question_id, answer):
+        self.answer_repository.establish_connection()
+        self.answer_repository.create_answer(user_id, question_id, answer)
+        self.answer_repository.close_connection()
+        return True
+
+    def update_answer(self, user_id, question_id, answer):
+        self.answer_repository.establish_connection()
+        self.answer_repository.update_answer(user_id, question_id, answer)
+        self.answer_repository.close_connection()
+        return True
+
 
 def main():
     db_credentials = credentials.db_credentials

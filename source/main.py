@@ -53,6 +53,27 @@ def create_user(name,gender):
     voting_system_repository.create_user(name, gender)
     return
 
+def check_if_user_answered_question(username,questionid):
+    voting_system_repository = VotingSystemRepository(db_credentials)
+    userid = voting_system_repository.get_user_by_name(username)
+    userid =userid[0]
+    answer = voting_system_repository.check_if_user_answered_question(userid,questionid)
+    return answer
+
+def create_answer(username,questionid,answer):
+    voting_system_repository = VotingSystemRepository(db_credentials)
+    userid = voting_system_repository.get_user_by_name(username)
+    userid = userid[0]
+    voting_system_repository.create_answer(userid,questionid,answer)
+    return
+
+def update_answer(username,questionid,answer):
+    voting_system_repository = VotingSystemRepository(db_credentials)
+    userid = voting_system_repository.get_user_by_name(username)
+    userid = userid[0]
+    voting_system_repository.update_answer(userid,questionid,answer)
+    return
+
 @app.route("/form",methods=['GET', 'POST'])
 def form_page():
 
@@ -75,6 +96,22 @@ def form_page():
             print("User doesn't exist")
             print(userdata["name"], userdata["gender"])
             create_user(userdata["name"],userdata["gender"])
+
+        if not check_if_user_answered_question(userdata["name"],1):
+            create_answer(userdata["name"],1,fields[0].answer)
+        else:
+            update_answer(userdata["name"],1,fields[0].answer)
+
+        if not check_if_user_answered_question(userdata["name"],2):
+            create_answer(userdata["name"],2,fields[1].answer)
+        else:
+            update_answer(userdata["name"],2,fields[1].answer)
+
+        if not check_if_user_answered_question(userdata["name"],3):
+            create_answer(userdata["name"],3,fields[2].answer)
+        else:
+            update_answer(userdata["name"],3,fields[2].answer)
+        
         return render_template('pages/form_validated.html',f=fields, userdata=userdata)
     else:
         return render_template('pages/form.html',f=fields)
