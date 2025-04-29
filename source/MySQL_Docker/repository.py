@@ -91,30 +91,45 @@ class VotingSystemRepository:
         self.user_repository.establish_connection()
         users = self.user_repository.get_all_users()
         self.user_repository.close_connection()
+        with open("log.txt","a") as f:
+            f.write(f"Get all users")
+            f.close()
         return users
 
     def get_user_by_id(self, user_id):
         self.user_repository.establish_connection()
         user = self.user_repository.get_user_by_id(user_id)
         self.user_repository.close_connection()
+        with open("log.txt","a") as f:
+            f.write(f"User requested by ID:{user}")
+            f.close()
         return user
 
     def get_all_answers(self):
         self.answer_repository.establish_connection()
         answers = self.answer_repository.get_all_answers()
         self.answer_repository.close_connection()
+        with open("log.txt","a") as f:
+            f.write(f"Get all answers")
+            f.close()
         return answers
 
     def get_answers_by_user_id(self, user_id):
         self.answer_repository.establish_connection()
         answers = self.answer_repository.get_answers_by_user_id(user_id)
         self.answer_repository.close_connection()
+        with open("log.txt","a") as f:
+            f.write(f"Get answers by user ID:{answers}")
+            f.close()
         return answers
 
     def get_user_by_name(self, user_name):
         self.user_repository.establish_connection()
         user = self.user_repository.get_user_by_name(user_name)
         self.user_repository.close_connection()
+        with open("log.txt","a") as f:
+            f.write(f"Get user by name:{user}")
+            f.close()
         return user
 
     def create_user(self, user_name, gender):
@@ -127,6 +142,9 @@ class VotingSystemRepository:
             genderint=1
         self.user_repository.create_user(user_name, genderint)
         self.user_repository.close_connection()
+        with open("log.txt","a") as f:
+            f.write(f"Created user:{user_name}")
+            f.close()
         return True
 
     def check_if_user_answered_question(self, user_id, question_id):
@@ -136,6 +154,9 @@ class VotingSystemRepository:
             return True
         else:
             self.answer_repository.close_connection()
+            with open("log.txt", "a") as f:
+                f.write(f"Check if user answered question:{user_id}")
+                f.close()
             return False
 
 
@@ -143,12 +164,18 @@ class VotingSystemRepository:
         self.answer_repository.establish_connection()
         self.answer_repository.create_answer(user_id, question_id, answer)
         self.answer_repository.close_connection()
+        with open("log.txt","a") as f:
+            f.write(f"Create answer by user {user_id} with answer {answer}")
+            f.close()
         return True
 
     def update_answer(self, user_id, question_id, answer):
         self.answer_repository.establish_connection()
         self.answer_repository.update_answer(user_id, question_id, answer)
         self.answer_repository.close_connection()
+        with open("log.txt","a") as f:
+            f.write(f"Update answer by user {user_id} with answer {answer}")
+            f.close()
         return True
 
 
