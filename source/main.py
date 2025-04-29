@@ -45,13 +45,7 @@ def answer_page():
         a=list(a)
         a[3]=get_user_by_id(a[3])
         answerlist.append(a)
-    answers=answerlist
-    answers = str(answers)
-    answers = answers[1:-1]
-    answers = "" + answers + ""
-    answers = answers.replace("), (",")(")
-
-    return render_template('pages/answers.html', answers=answers)
+    return render_template('pages/answers.html', answers=answerlist)
 
 def check_if_user_exists(name):
     voting_system_repository = VotingSystemRepository(db_credentials)
